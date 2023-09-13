@@ -1,4 +1,5 @@
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -33,8 +34,9 @@ class _LoginPageState extends State<LoginPage> {
          }
       }on Exception catch(e){
         debugPrint('Some error has been occured');
+        final msg=await Connectivity()..checkConnectivity();
 
-        _showAlertDialog(context,e);
+        _showAlertDialog(context);
         return ;
       }
 
@@ -73,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
         ),
     );
   }
-    void _showAlertDialog(BuildContext context,e) {
+    void _showAlertDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
